@@ -949,30 +949,24 @@
                 });
                 headerRow.height = 28;
 
-                sheet.columns = [
-                    { width: 18 }, { width: 14 }, { width: 32 },
-                    { width: 24 }, { width: 18 }, { width: 20 },
-                    { width: 12 }, { width: 18 }, { width: 34 }
-                ];
+               sheet.columns = [
+    { width: 18 }, { width: 14 }, { width: 32 },
+    { width: 24 }, { width: 18 }, { width: 20 },
+    { width: 12 }, { width: 18 }
+];
 
-                inspections.forEach((item, idx) => {
-                    const rowIndex = headerRowIndex + 1 + idx;
-                    const row = sheet.getRow(rowIndex);
+inspections.forEach((item, idx) => {
+    const rowIndex = headerRowIndex + 1 + idx;
+    const row = sheet.getRow(rowIndex);
 
-                    const obsResumen = Object.entries(item.checklist || {})
-                        .filter(([, v]) => v && v.obs && v.obs.trim() !== '' && v.obs.trim().toUpperCase() !== 'OK')
-                        .map(([k, v]) => `${k}: ${v.obs.trim()}`)
-                        .join(' | ');
-
-                    row.getCell(1).value = item.lastInspection || '';
-                    row.getCell(2).value = item.id || '';
-                    row.getCell(3).value = item.location || '';
-                    row.getCell(4).value = item.responsible || '';
-                    row.getCell(5).value = item.status || '';
-                    row.getCell(6).value = item.inspector || '';
-                    row.getCell(7).value = (item.photos || []).length;
-                    row.getCell(8).value = item.signature ? 'Sí' : 'No';
-                    row.getCell(9).value = obsResumen;
+    row.getCell(1).value = item.lastInspection || '';
+    row.getCell(2).value = item.id || '';
+    row.getCell(3).value = item.location || '';
+    row.getCell(4).value = item.responsible || '';
+    row.getCell(5).value = item.status || '';
+    row.getCell(6).value = item.inspector || '';
+    row.getCell(7).value = (item.photos || []).length;
+    row.getCell(8).value = item.signature ? 'Sí' : 'No';
 
                     let fillColor = 'FFC8E6C9';
                     if (item.status === 'Observación') fillColor = 'FFFFE0B2';
